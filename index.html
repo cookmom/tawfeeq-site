@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tawfeeq Martin — Creative Technologist</title>
+<meta name="description" content="Senior Virtual Production Engineer at Industrial Light & Magic. Building tools that change how stories are told.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/thin/style.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#f8f7f4;--fg:#1a1a1a;--muted:#6b6b6b;--border:#e0dfdc;--accent:#1a1a1a}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--fg);font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* Reveal animations */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+/* Layout */
+.container{max-width:1200px;margin:0 auto;padding:0 clamp(24px,5vw,64px)}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(248,247,244,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+nav .container{display:flex;justify-content:space-between;align-items:center;height:64px}
+nav .logo{font-weight:500;font-size:.95rem;letter-spacing:-.01em;color:var(--fg);text-decoration:none}
+nav ul{list-style:none;display:flex;gap:32px}
+nav a{text-decoration:none;color:var(--muted);font-size:.85rem;font-weight:400;letter-spacing:.02em;transition:color .2s}
+nav a:hover{color:var(--fg)}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:64px}
+.hero h1{font-size:clamp(3.5rem,10vw,8rem);font-weight:200;letter-spacing:-.04em;line-height:.95;margin-bottom:24px}
+.hero .label{font-size:clamp(.8rem,1.2vw,1rem);font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+.hero .intro{max-width:520px;font-size:clamp(1rem,1.4vw,1.15rem);font-weight:300;color:var(--muted);line-height:1.7}
+
+/* Section */
+section{padding:clamp(80px,12vw,160px) 0}
+.section-label{font-size:.75rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:48px}
+
+/* Work grid */
+.work-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:24px}
+.work-card{border:1px solid var(--border);border-radius:4px;padding:40px 32px;transition:border-color .3s}
+.work-card:hover{border-color:var(--fg)}
+.work-card .placeholder{width:100%;aspect-ratio:16/9;background:#eeedea;border-radius:2px;margin-bottom:28px}
+.work-card h3{font-size:1.25rem;font-weight:400;letter-spacing:-.01em;margin-bottom:8px}
+.work-card .desc{font-size:.9rem;color:var(--muted);font-weight:300;margin-bottom:16px;line-height:1.6}
+.work-card .meta{display:flex;justify-content:space-between;align-items:center;font-size:.75rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;font-weight:500}
+.work-card a{text-decoration:none;color:inherit}
+.work-card a.external{color:var(--fg);border-bottom:1px solid var(--border);padding-bottom:1px;transition:border-color .2s}
+.work-card a.external:hover{border-color:var(--fg)}
+
+/* Endorsements */
+.endorsements{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:48px}
+.endorsement{padding:0}
+.endorsement blockquote{font-size:clamp(1.1rem,1.8vw,1.35rem);font-weight:200;line-height:1.7;font-style:italic;margin-bottom:24px;letter-spacing:-.01em}
+.endorsement .attribution{font-size:.85rem;font-weight:500;margin-bottom:2px}
+.endorsement .title{font-size:.8rem;color:var(--muted);font-weight:300}
+
+/* About */
+.about-text{max-width:680px;font-size:clamp(1rem,1.4vw,1.15rem);font-weight:300;line-height:1.8;color:var(--fg)}
+.about-text+.about-text{margin-top:20px}
+
+/* Currently building */
+.current{max-width:680px}
+.current h3{font-size:clamp(1.5rem,3vw,2rem);font-weight:200;letter-spacing:-.02em;margin-bottom:16px}
+.current p{font-size:clamp(1rem,1.4vw,1.1rem);font-weight:300;color:var(--muted);line-height:1.7;margin-bottom:24px}
+.current a.cta{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--fg);padding-bottom:4px;transition:opacity .2s}
+.current a.cta:hover{opacity:.6}
+
+/* Footer */
+footer{border-top:1px solid var(--border);padding:48px 0}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-links{display:flex;gap:24px;align-items:center}
+.footer-links a{color:var(--muted);text-decoration:none;font-size:1.2rem;transition:color .2s}
+.footer-links a:hover{color:var(--fg)}
+.copyright{font-size:.8rem;color:var(--muted);font-weight:300}
+
+@media(max-width:640px){
+  nav ul{gap:20px}
+  .work-grid{grid-template-columns:1fr}
+  .endorsements{grid-template-columns:1fr}
+  footer .container{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="#" class="logo">Tawfeeq Martin</a>
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="reveal">
+      <h1>Tawfeeq<br>Martin</h1>
+      <p class="label">Creative Technologist · Virtual Production Engineer</p>
+      <p class="intro">Building tools that change how stories are told. Currently engineering virtual production at Industrial Light &amp; Magic.</p>
+    </div>
+  </div>
+</header>
+
+<section id="work">
+  <div class="container">
+    <p class="section-label reveal">Selected Work</p>
+    <div class="work-grid">
+
+      <div class="work-card reveal">
+        <div class="placeholder"></div>
+        <h3>ILM StageCraft</h3>
+        <p class="desc">The LED volume virtual production technology behind the biggest films and series of the last decade.</p>
+        <div class="meta"><span>2020 — Present</span><span>ILM</span></div>
+      </div>
+
+      <div class="work-card reveal">
+        <div class="placeholder"></div>
+        <h3>Google "HELP"</h3>
+        <p class="desc">Built Mill Stitch for real-time 360-degree on-set viewing. Directed by Justin Lin.</p>
+        <div class="meta"><span>2016</span><span>Double Gold, Cannes Lions</span></div>
+      </div>
+
+      <div class="work-card reveal">
+        <div class="placeholder"></div>
+        <h3>The Mill Blackbird</h3>
+        <p class="desc">A fully transformable car rig that revolutionized automotive advertising production.</p>
+        <div class="meta"><span>2016</span><span>HPA Judges Award</span></div>
+      </div>
+
+      <div class="work-card reveal">
+        <div class="placeholder"></div>
+        <h3>The Human Race</h3>
+        <p class="desc">Real-time AR compositing for Chevrolet and Epic Games. Live broadcast, no post.</p>
+        <div class="meta"><span>2017</span><span>Gold Pencil, The One Show</span></div>
+      </div>
+
+      <div class="work-card reveal">
+        <div class="placeholder"></div>
+        <h3>Ramadan Clock</h3>
+        <p class="desc">A personal project — a prayer-aware clock with tawaf animation, built with faith and code.</p>
+        <div class="meta"><span>2024 — Present</span><a href="https://cookmom.github.io/ramadan-clock/" class="external" target="_blank" rel="noopener">View Project <i class="ph-thin ph-arrow-up-right"></i></a></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <p class="section-label reveal">Endorsements</p>
+    <div class="endorsements">
+
+      <div class="endorsement reveal">
+        <blockquote>"An exceptional architect of new technologies for storytelling."</blockquote>
+        <p class="attribution">Regina Dugan</p>
+        <p class="title">Former Director of DARPA · VP, Google ATAP · VP, Facebook Building 8</p>
+      </div>
+
+      <div class="endorsement reveal">
+        <blockquote>"Truly a 5-star master of his craft."</blockquote>
+        <p class="attribution">Ginny Galloway</p>
+        <p class="title">Executive Producer, Marshmallow Laser Feast</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <p class="section-label reveal">About</p>
+    <p class="about-text reveal">Originally from Cape Town, South Africa, Tawfeeq Martin has spent over twenty years at the frontier of creative technology — from pioneering real-time production tools at The Mill to engineering the LED volumes at ILM that changed filmmaking. Working on StageCraft was a childhood dream come true.</p>
+    <p class="about-text reveal">Beyond production stages, he explores generative art with TouchDesigner, makes music in Ableton Live, and is quietly building at the intersection of technology and faith. Recognized by Cannes Lions, SXSW, The One Show, and HPA. Member of the Visual Effects Society.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="current reveal">
+      <p class="section-label">Currently Building</p>
+      <h3>Ramadan Clock</h3>
+      <p>A prayer-aware clock with a tawaf animation — a personal project exploring how technology can serve daily spiritual practice.</p>
+      <a href="https://cookmom.github.io/ramadan-clock/" class="cta" target="_blank" rel="noopener">Visit Ramadan Clock <i class="ph-thin ph-arrow-up-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="container">
+    <div class="footer-links">
+      <a href="https://x.com/LOOKMOM" target="_blank" rel="noopener" aria-label="X / Twitter"><i class="ph-thin ph-x-logo"></i></a>
+      <a href="https://linkedin.com/in/tawfeeq-martin-82991a14/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="ph-thin ph-linkedin-logo"></i></a>
+      <a href="mailto:hello@tawfeeqmartin.com" aria-label="Email"><i class="ph-thin ph-envelope"></i></a>
+    </div>
+    <p class="copyright">&copy; 2026 Tawfeeq Martin</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('visible')});
+    return;
+  }
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}
+    });
+  },{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el)});
+})();
+</script>
+
+</body>
+</html>
